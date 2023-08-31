@@ -34,57 +34,112 @@ const handleDelete = (id) => {
 
 
 return(
+    // <div>
+    //     <h3>Your Photo Collection</h3>
+    //     {
+    //         data.map((singleData)=>{
+    //             // const base64String = btoa(
+    //             //     String.fromCharCode(...new Uint8Array((singleData.img.data.data)))
+    //             // );
+    //             const base64String = btoa(new Uint8Array(singleData.img.data.data).reduce(function(data, byte) {
+    //                 return data + String.fromCharCode(byte);
+    //             }, ''))
+    //             return (
+    //                 <div
+    //                   key={singleData._id}
+    //                   style={{
+    //                     display: "flex",
+    //                     alignItems: "center",
+    //                     marginBottom: "20px",
+    //                   }}
+    //                 >
+    //                   <img
+    //                     src={`data:image/png;base64,${base64String}`}
+    //                     alt={`Image ${singleData._id}`}
+    //                     style={{ width: "300px", height: "300px" }}
+    //                   />
+    //                   <div style={{ marginLeft: "100px" }}>
+    //                     <h3 style={{ marginLeft: "30px" }}>Title: {singleData.title}</h3>
+    //                     <h3 style={{ marginLeft: "30px" }}>Location: {singleData.location}</h3>
+    //                     <div>
+    //                       <button className="signupButton"
+    //                         onClick={() => handleDelete(singleData._id)}
+    //                         style={{
+    //                           backgroundColor: "red",
+    //                           color: "white",
+    //                           marginRight: "10px",
+    //                         }}>Delete</button>
+    //                       <button className="signupButton" onClick={() => handleAddToFavorites(singleData._id)}
+    //                       style={{
+    //                         backgroundColor: "skyblue",
+    //                         color: "white",
+    //                         marginRight: "10px",
+    //                       }}
+    //                       >
+    //                         Add to Favorites
+    //                       </button>
+    //                     </div>
+    //                   </div>
+    //                 </div>
+    //               );
+    //         })
+    //     }
+    // </div>
     <div>
-        <h3>Your Photo Collection</h3>
-        {
-            data.map((singleData)=>{
-                // const base64String = btoa(
-                //     String.fromCharCode(...new Uint8Array((singleData.img.data.data)))
-                // );
-                const base64String = btoa(new Uint8Array(singleData.img.data.data).reduce(function(data, byte) {
-                    return data + String.fromCharCode(byte);
-                }, ''))
-                return (
-                    <div
-                      key={singleData._id}
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        marginBottom: "20px",
-                      }}
-                    >
-                      <img
-                        src={`data:image/png;base64,${base64String}`}
-                        alt={`Image ${singleData._id}`}
-                        style={{ width: "300px", height: "300px" }}
-                      />
-                      <div style={{ marginLeft: "10px" }}>
-                        <h3 style={{ marginLeft: "30px" }}>Title: {singleData.title}</h3>
-                        <h3 style={{ marginLeft: "30px" }}>Location: {singleData.location}</h3>
-                        <div>
-                          <button className="signupButton"
-                            onClick={() => handleDelete(singleData._id)}
-                            style={{
-                              backgroundColor: "red",
-                              color: "white",
-                              marginRight: "10px",
-                            }}>Delete</button>
-                          <button className="signupButton" onClick={() => handleAddToFavorites(singleData._id)}
-                          style={{
-                            backgroundColor: "skyblue",
-                            color: "white",
-                            marginRight: "10px",
-                          }}
-                          >
-                            Add to Favorites
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  );
-            })
-        }
-    </div>
+  <h3>Your Photo Collection</h3>
+  <div style={{ display: "flex", flexWrap: "wrap" }}>
+    {data.map((singleData) => {
+      const base64String = btoa(
+        new Uint8Array(singleData.img.data.data).reduce(function (data, byte) {
+          return data + String.fromCharCode(byte);
+        }, "")
+      );
+      return (
+        <div
+          key={singleData._id}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            marginRight: "20px",
+          }}
+        >
+          <img
+            src={`data:image/png;base64,${base64String}`}
+            alt={`Image ${singleData._id}`}
+            style={{ width: "300px", height: "300px" }}
+          />
+          <div>
+            <h3 style={{ marginTop: "10px" }}>Title: {singleData.title}</h3>
+            <h3>Location: {singleData.location}</h3>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <button
+                className="signupButton"
+                onClick={() => handleDelete(singleData._id)}
+                style={{
+                  backgroundColor: "red",
+                  color: "white",
+                }}
+              >
+                Delete
+              </button>
+              <button
+                className="signupButton"
+                onClick={() => handleAddToFavorites(singleData._id)}
+                style={{
+                  backgroundColor: "skyblue",
+                  color: "white",
+                }}
+              >
+                Add to Favorites
+              </button>
+            </div>
+          </div>
+        </div>
+      );
+    })}
+  </div>
+</div>
+
 )
 };
 
